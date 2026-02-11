@@ -1,5 +1,5 @@
 /**
- * MCP WebSocket Client - 连接 MCP Server
+ * MCP Client - 支持 HTTP 和 WebSocket 两种连接方式
  */
 import {
   checkAllPlatformsAuth,
@@ -9,6 +9,7 @@ import {
 import { markdownToHtml } from '@wechatsync/core'
 import { createLogger } from '../lib/logger'
 import { performSync } from '../background/sync-service'
+import { mcpHttpClient } from './http-client'
 
 const logger = createLogger('MCPClient')
 
@@ -47,6 +48,9 @@ class McpClient {
   // 安全验证 token
   private token: string | null = null
 
+  // 连接模式
+  private connectionMode: 'http' | 'websocket' = 'websocket'
+
   // 指数退避重连配置
   private reconnectAttempts = 0
   private readonly minReconnectInterval = 1000 // 1 秒
@@ -74,9 +78,17 @@ class McpClient {
   }
 
   /**
+   * 设置连接模式
+   */
+  setConnectionMode(mode: 'http' | 'websocket'): void {
+    this.connectionMode = mode
+    logger.debug(`Connection mode set to: ${mode}`)
+  }
+
+  /**
    * 连接到 MCP Server
    */
-  connect(): void {
+  async connect(): Promise<void> {
     // 清理旧连接
     if (this.ws) {
       if (this.ws.readyState === WebSocket.OPEN) {
@@ -94,38 +106,53 @@ class McpClient {
       this.ws = null
     }
 
-    logger.debug(`Connecting to ${this.serverUrl} (attempt ${this.reconnectAttempts + 1})`)
+    if (this.connectionMode === 'http') {
+      // HTTP 模式
+      try {
+        await mcpHttpClient.register()
+        logger.debug('Connected to MCP Server via HTTP')
+        this.reconnectAttempts = 0
+      } catch (error) {
+        logger.error('HTTP connection failed:', error)
+        // 回退到 WebSocket
+        this.connectionMode = 'websocket'
+        await this.connect()
+      }
+    } else {
+      // WebSocket 模式
+      logger.debug(`Connecting to ${this.serverUrl} (attempt ${this.reconnectAttempts + 1})`)
 
-    try {
-      this.ws = new WebSocket(this.serverUrl)
+      try {
+        this.ws = new WebSocket(this.serverUrl)
 
-      this.ws.onopen = () => {
-        logger.debug('Connected to MCP Server')
-        this.reconnectAttempts = 0 // 重置重连计数
-        if (this.reconnectTimer) {
-          clearTimeout(this.reconnectTimer)
-          this.reconnectTimer = null
+        this.ws.onopen = () => {
+          logger.debug('Connected to MCP Server')
+          this.reconnectAttempts = 0 // 重置重连计数
+          if (this.reconnectTimer) {
+            clearTimeout(this.reconnectTimer)
+            this.reconnectTimer = null
+          }
         }
-      }
 
-      this.ws.onmessage = (event) => {
-        this.handleMessage(event.data)
-      }
+        this.ws.onmessage = (event) => {
+          this.handleMessage(event.data)
+        }
 
-      this.ws.onclose = (event) => {
-        logger.debug(`Disconnected (code: ${event.code}), scheduling reconnect...`)
+        this.ws.onclose = (event) => {
+          logger.debug(`Disconnected (code: ${event.code}), scheduling reconnect...`)
+          this.ws = null
+          this.scheduleReconnect()
+        }
+
+        this.ws.onerror = () => {
+          // error 事件后通常会触发 close，不需要在这里重连
+          logger.debug('Connection error')
+        }
+      } catch (error) {
+        logger.error('Connection failed:', error)
         this.ws = null
         this.scheduleReconnect()
       }
-
-      this.ws.onerror = () => {
-        // error 事件后通常会触发 close，不需要在这里重连
-        logger.debug('Connection error')
-      }
-    } catch (error) {
-      logger.error('Connection failed:', error)
-      this.ws = null
-      this.scheduleReconnect()
     }
   }
 
@@ -181,15 +208,28 @@ class McpClient {
   /**
    * 重置重连计数（供外部调用）
    */
-  resetReconnect(): void {
+  async resetReconnect(): Promise<void> {
     this.reconnectAttempts = 0
     if (!this.isConnected()) {
-      this.connect()
+      await this.connect()
     }
   }
 
   /**
-   * 处理来自 MCP Server 的请求
+   * 检查是否已连接
+   */
+  isConnected(): boolean {
+    if (this.connectionMode === 'http') {
+      // HTTP 模式通过检查连接状态
+      return true // HTTP 连接是持久的
+    } else {
+      // WebSocket 模式
+      return this.ws?.readyState === WebSocket.OPEN
+    }
+  }
+
+  /**
+   * 处来自 MCP Server 的请求
    */
   private async handleMessage(data: string): Promise<void> {
     try {
@@ -228,9 +268,32 @@ class McpClient {
         error,
       }
 
-      this.ws?.send(JSON.stringify(response))
+      // WebSocket 模式下发送响应
+      if (this.ws) {
+        this.ws.send(JSON.stringify(response))
+      }
     } catch (error) {
       logger.error('Failed to handle message:', error)
+    }
+  }
+
+  /**
+   * 发送请求到 MCP Server（HTTP 模式）
+   */
+  private async sendHttpRequest(method: string, params?: Record<string, unknown>): Promise<unknown> {
+    return await mcpHttpClient.request(method, params)
+  }
+
+  /**
+   * 调用工具方法（根据连接模式选择）
+   */
+  async callTool(method: string, params?: Record<string, unknown>): Promise<unknown> {
+    if (this.connectionMode === 'http') {
+      // HTTP 模式直接调用
+      return await this.sendHttpRequest(method, params)
+    } else {
+      // WebSocket 模式通过发送消息调用
+      return await this.handleMethod(method, params)
     }
   }
 

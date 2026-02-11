@@ -575,14 +575,25 @@ async function handleMessage(message: MessageAction, sender?: chrome.runtime.Mes
       const storage = await chrome.storage.local.get('mcpToken')
       const token = storage.mcpToken || crypto.randomUUID()
       await chrome.storage.local.set({ mcpEnabled: true, mcpToken: token })
-      // 设置 token 并启动客户端
-      mcpClient.setToken(token)
-      startMcpClient()
-      logger.info(' MCP enabled')
-      trackMcpUsage('enable').catch(() => {})
-      // 追踪 MCP 用户里程碑
-      trackMilestone('mcp_user').catch(() => {})
-      return { success: true, token }
+
+      // 优先尝试启动 HTTP MCP 客户端
+      try {
+        const { startMcpHttpConnection } = await import('../mcp/http-client')
+        await startMcpHttpConnection()
+        logger.info(' MCP HTTP connection established')
+        trackMcpUsage('enable').catch(() => {})
+        trackMilestone('mcp_user').catch(() => {})
+        return { success: true, token, mode: 'http' }
+      } catch (error) {
+        logger.warn(' MCP HTTP connection failed, falling back to WebSocket:', error)
+        // 回退到 WebSocket
+        mcpClient.setToken(token)
+        startMcpClient()
+        logger.info(' MCP enabled (WebSocket mode)')
+        trackMcpUsage('enable').catch(() => {})
+        trackMilestone('mcp_user').catch(() => {})
+        return { success: true, token, mode: 'websocket' }
+      }
     }
 
     case 'MCP_DISABLE': {
@@ -1062,12 +1073,43 @@ async function initMcpIfEnabled() {
       mcpClient.setToken(token)
       logger.info(' Starting MCP client with new token...')
     }
-    startMcpClient()
+
+    // 尝试启动 HTTP MCP 客户端（优先尝试）
+    try {
+      const { startMcpHttpConnection } = await import('../mcp/http-client')
+      await startMcpHttpConnection()
+      logger.info(' MCP HTTP connection established')
+    } catch (error) {
+      logger.warn(' MCP HTTP connection failed, falling back to WebSocket:', error)
+      // 回退到 WebSocket
+      startMcpClient()
+    }
   }
 }
 
-// 启动 MCP 客户端（如果已启用）
-initMcpIfEnabled()
+/**
+ * 启动 webhook 服务器（如果 MCP 已启用）
+ */
+async function initWebhookServer() {
+  const storage = await chrome.storage.local.get('mcpEnabled')
+  if (storage.mcpEnabled) {
+    try {
+      const { startWebhookServer } = await import('./webhook-server')
+      await startWebhookServer()
+      logger.info(' Webhook server started')
+    } catch (error) {
+      logger.error(' Failed to start webhook server:', error)
+    }
+  }
+}
+
+// 启动 MCP 客户端和 webhook 服务器（如果已启用）
+Promise.all([
+  initMcpIfEnabled(),
+  initWebhookServer()
+]).catch(error => {
+  logger.error(' Failed to initialize MCP:', error)
+})
 
 /**
  * 预检查平台认证状态（后台静默执行）

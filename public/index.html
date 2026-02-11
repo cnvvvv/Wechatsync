@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信公众号同步助手 - 多平台内容分发工具</title>
+  <meta name="description" content="微信公众号同步助手 - 一键同步文章到知乎、掘金、头条等多个平台，支持CMS账户管理，让内容创作更高效">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="#07C160"/>
+            <path d="M16 8C11.582 8 8 11.582 8 16C8 20.418 11.582 24 16 24C20.418 24 24 20.418 24 16C24 11.582 20.418 8 16 8ZM16 10C19.309 10 22 12.691 22 16C22 19.309 19.309 22 16 22C12.691 22 10 19.309 10 16C10 12.691 12.691 10 16 10Z" fill="white"/>
+            <circle cx="16" cy="16" r="2" fill="white"/>
+          </svg>
+          <span class="logo-text">微信同步助手</span>
+        </div>
+        <nav class="nav">
+          <a href="#features" class="nav-link">功能特性</a>
+          <a href="#installation" class="nav-link">安装指南</a>
+          <a href="#mcp" class="nav-link">MCP集成</a>
+          <a href="#download" class="nav-link">立即下载</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              微信公众号<br>
+              <span class="highlight">同步助手</span>
+            </h1>
+            <p class="hero-description">
+              一键同步文章到知乎、掘金、头条等多个平台<br>
+              支持CMS账户管理，让内容创作更高效
+            </p>
+            <div class="hero-buttons">
+              <a href="#download" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                立即下载
+              </a>
+              <a href="#features" class="btn btn-secondary">
+                了解更多
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="微信公众号同步助手">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">功能特性</h2>
+          <p class="section-description">强大的功能，让您的内容创作事半功倍</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">多平台同步</h3>
+            <p class="feature-description">支持知乎、掘金、头条、CSDN等多个平台，一键同步到所有目标平台</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">安全认证</h3>
+            <p class="feature-description">各平台官方OAuth认证，安全可靠，支持Token验证和Session管理</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">文章管理</h3>
+            <p class="feature-description">智能提取文章内容，支持Markdown和HTML格式，自动保存同步历史</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">CMS集成</h3>
+            <p class="feature-description">支持WordPress、Typecho等CMS系统，可直接发布到您的博客</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">图片上传</h3>
+            <p class="feature-description">自动图片上传和图床管理，支持多种图床平台，自动转换图片格式</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 20V10"/>
+                <path d="M12 20V4"/>
+                <path d="M6 20v-6"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">AI增强</h3>
+            <p class="feature-description">集成Claude AI，支持智能内容提取、优化和格式转换</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="installation" class="installation">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">安装指南</h2>
+          <p class="section-description">简单几步，即可开始使用同步助手</p>
+        </div>
+
+        <div class="installation-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>下载扩展</h3>
+              <p>点击下方下载按钮，获取最新版本的Chrome扩展文件</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>打开Chrome扩展管理页面</h3>
+              <p>在浏览器地址栏输入 chrome://extensions/ 并回车</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>启用开发者模式</h3>
+              <p>在扩展管理页面右上角打开"开发者模式"开关</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>加载扩展</h3>
+              <p>点击"加载已解压的扩展程序"，选择下载的文件夹</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h3>配置平台账号</h3>
+              <p>点击扩展图标，登录需要同步的平台账号</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mcp" class="mcp-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">MCP集成</h2>
+          <p class="section-description">与Claude Desktop深度集成，实现智能内容创作</p>
+        </div>
+
+        <div class="mcp-content">
+          <div class="mcp-intro">
+            <h3>MCP协议支持</h3>
+            <p>同步助手支持Model Context Protocol (MCP)，可以与Claude Desktop无缝集成，让您在AI写作的同时直接调用同步功能。</p>
+          </div>
+
+          <div class="mcp-features">
+            <div class="mcp-feature">
+              <h4>🚀 实时同步</h4>
+              <p>在Claude Desktop中写作完成后，直接调用同步工具，一键发布到所有平台</p>
+            </div>
+
+            <div class="mcp-feature">
+              <h4>🔍 智能提取</h4>
+              <p>从浏览器页面自动提取文章内容，保留格式和图片</p>
+            </div>
+
+            <div class="mcp-feature">
+              <h4>🎯 精准发布</h4>
+              <p>选择目标平台，直接发布到指定的社交媒体或CMS</p>
+            </div>
+          </div>
+
+          <div class="mcp-setup">
+            <h4>配置步骤</h4>
+            <ol>
+              <li>在Claude Desktop中打开设置</li>
+              <li>添加新的MCP服务器</li>
+              <li>选择HTTP传输模式</li>
+              <li>输入服务器地址：<code>https://your-domain.vercel.app/api/mcp</code></li>
+              <li>保存配置并重启Claude Desktop</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="download">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">立即下载</h2>
+          <p class="section-description">开始您的高效内容创作之旅</p>
+        </div>
+
+        <div class="download-content">
+          <div class="download-info">
+            <h3>当前版本：2.0.4</h3>
+            <p>支持Chrome 88+，最新特性：</p>
+            <ul>
+              <li>支持MCP协议集成</li>
+              <li>新增图床平台支持</li>
+              <li>优化文章提取算法</li>
+              <li>增强用户体验</li>
+            </ul>
+
+            <div class="download-buttons">
+              <a href="#" class="btn btn-primary btn-large" onclick="downloadExtension()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                下载Chrome扩展
+              </a>
+              <a href="https://chrome.google.com/webstore/detail/wechatsync" class="btn btn-secondary btn-large" target="_blank">
+                Chrome应用商店
+              </a>
+            </div>
+          </div>
+
+          <div class="download-requirements">
+            <h4>系统要求</h4>
+            <ul>
+              <li>Chrome 88 或更高版本</li>
+              <li>稳定的网络连接</li>
+              <li>各平台账号（可选）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">用户评价</h2>
+          <p class="section-description">看看其他用户怎么说</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"这个工具太棒了！一键同步到多个平台，为我节省了大量时间。"</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">👨‍💻</div>
+              <div class="author-info">
+                <h5>张小明</h5>
+                <p>内容创作者</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"与Claude Desktop的集成非常流畅，写作完成后直接发布，体验完美！"</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">👩‍💼</div>
+              <div class="author-info">
+                <h5>李小红</h5>
+                <p>产品经理</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>"文章提取准确率高，图片上传也很稳定，强烈推荐！"</p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">👨‍🎓</div>
+              <div class="author-info">
+                <h5>王小华</h5>
+                <p>技术博主</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">常见问题</h2>
+          <p class="section-description">快速找到您需要的答案</p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>如何同步文章到多个平台？</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>只需在扩展中选择要同步的平台，然后点击同步按钮即可。支持批量同步，一次操作发布到所有目标平台。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>是否支持自定义图片上传？</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>是的，支持多种图床平台，包括微博图床、知乎图床等。您可以在设置中配置默认图床。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>MCP集成需要额外配置吗？</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>不需要。扩展会自动处理MCP连接，您只需在Claude Desktop中启用即可。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>数据安全吗？</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>非常安全。我们使用官方OAuth认证，不存储您的密码。所有数据传输都使用HTTPS加密。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>产品</h4>
+          <ul>
+            <li><a href="#features">功能特性</a></li>
+            <li><a href="#installation">安装指南</a></li>
+            <li><a href="#download">下载</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>支持</h4>
+          <ul>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#">使用教程</a></li>
+            <li><a href="#">联系我们</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>关于</h4>
+          <ul>
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">服务条款</a></li>
+            <li><a href="#">更新日志</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>关注我们</h4>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 微信同步助手. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

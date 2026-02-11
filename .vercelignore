@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build artifacts
+dist/
+build/
+
+# Development files
+.vscode/
+*.log
+*.tmp
+
+# Extension build files
+packages/extension/dist/
+packages/extension/.crx/
+*.zip
+
+# Documentation
+docs/
+README.md
+CHANGELOG.md
+
+# Git
+.git/
+.gitignore
+
+# Tests
+**/*.test.ts
+**/*.spec.ts
+test/
+__tests__/
+
+# Local config
+.env.local
+.env.development.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
