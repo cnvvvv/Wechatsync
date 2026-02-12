@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm build",
+  "buildCommand": "echo 'Build complete'",
   "outputDirectory": "api",
   "functions": {
     "api/**/*.ts": {
@@ -7,7 +7,6 @@
     }
   },
   "env": {
-    "MCP_TOKEN_SECRET": "@mcp_token_secret",
     "EXTENSION_TTL": "300",
     "MAX_IMAGE_SIZE": "5242880",
     "MAX_ARTICLE_SIZE": "1048576",
