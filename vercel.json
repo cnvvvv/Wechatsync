@@ -2,7 +2,7 @@
   "buildCommand": "echo 'Build complete'",
   "outputDirectory": "api",
   "functions": {
-    "api/**/*.ts": {
+    "api/**/*.js": {
       "maxDuration": 60
     }
   }
