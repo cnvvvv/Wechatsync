@@ -5,6 +5,7 @@
   "description": "微信公众号同步助手 - MCP Server",
   "scripts": {
     "dev": "vercel dev",
+    "start": "node dist/index.js",
     "build": "echo 'Build complete'"
   },
   "engines": {

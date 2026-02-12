@@ -5,6 +5,7 @@
   "description": "微信公众号同步助手 - MCP Server",
   "scripts": {
     "dev": "vercel dev",
+    "start": "node dist/index.js",
     "build": "echo 'Build complete'"
   },
   "engines": {
@@ -14,5 +15,11 @@
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@vercel/node": "^3.0.0",
     "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.2"
   }
 }

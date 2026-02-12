@@ -5,11 +5,5 @@
     "api/**/*.ts": {
       "maxDuration": 60
     }
-  },
-  "env": {
-    "EXTENSION_TTL": "300",
-    "MAX_IMAGE_SIZE": "5242880",
-    "MAX_ARTICLE_SIZE": "1048576",
-    "MAX_CHUNKS": "10"
   }
 }
